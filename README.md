@@ -1,5 +1,7 @@
 # carwash-sim
 
+This is a carwash simulator for CMA6134 Assignment 1.
+
 ## Report
 
 - Cover page
