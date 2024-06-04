@@ -18,3 +18,15 @@
 - Inter-arrival time (car)
 
 Rand (service-time, inter-arrival time, service type)
+
+custDetails
+interTable
+evaluateResults
+
+prob
+lcg
+counter
+
+rvge
+rvgu
+main
