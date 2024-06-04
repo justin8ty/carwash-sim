@@ -23,8 +23,8 @@ function evalResults(intArrival, service)
 
     fprintf('Simulation Results:\n');
     fprintf('Avg. Inter-Arrival Time: %.2f\n', avgIntArrival);
-    fprintf('Avg. Waiting Time: %.2f\n', avgWaiting);
     fprintf('Avg. Arrival Time: %.2f\n', avgArrival);
+    fprintf('Avg. Waiting Time: %.2f\n', avgWaiting);
     fprintf('Avg. Time Spent: %.2f\n', avgTimeSpent);
     fprintf('Prob. of Waiting in Queue: %.2f\n', probWaiting);
     fprintf('Avg. Service Time / Counter: %.2f\n', avgService);
@@ -33,5 +33,6 @@ function evalResults(intArrival, service)
 % Average inter-arrival time
 % Average arrival time
 % Average waiting time
+% Average time spent in the system
 % Probability of waiting in the queue
-% Total time spent in the system
+% Average Service Time
