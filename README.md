@@ -2,6 +2,9 @@
 
 This is a carwash simulator for CMA6134 Assignment 1.
 
+![alt text](image.png)
+![alt text](image-1.png)
+
 ## Report
 
 - Cover page
