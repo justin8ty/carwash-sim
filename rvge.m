@@ -1,4 +1,4 @@
-function output = rvge (loopNum) 
+function output = rvge(loopNum) 
     sequence = rand(1,loopNum) ; 
     x = zeros(1,loopNum) ; 
     

@@ -20,7 +20,7 @@ function rangeArrival = interTable(r, loopNum, m, a, c, rangeArrival) {
         probability = rvgu(loopNum) ;
     
     else
-        printf ('zero \n');
+        fprintf('zero \n');
         return;
     end
     
@@ -40,7 +40,7 @@ function rangeArrival = interTable(r, loopNum, m, a, c, rangeArrival) {
     
     % setting cdf
     cdf= zeros(1,4) ;
-    cdf(1) = probability (1);
+    cdf(1) = probability(1);
     for i=2:4
         cdf(i) =probability(i) + cdf(i-1);
     end
@@ -54,33 +54,33 @@ function rangeArrival = interTable(r, loopNum, m, a, c, rangeArrival) {
 
     disp(' ');
 
-    printf('Arrival Time|');
+    fprintf('Arrival Time|');
     for i=1:1oopNum
-        printf ('   %d   |', i);
+        fprintf('   %d   |', i);
     end
-    printf('\n');
+    fprintf('\n');
 
     % checking if arrays work
     % disp(cdf);
     % disp(range);
 
-    printf ('Probability | ');
+    fprintf('Probability | ');
     %probability retrieved from main.m
-    for i = 1:length (probability)
-        printf('  %.2f  | ', probability(i));
+    for i = 1:length(probability)
+        fprintf('  %.2f  | ', probability(i));
     end
-    printf('\n');
+    fprintf('\n');
 
-    printf ('CDF     | ');
-    for i = 1:length (cdf)
-        printf (' %.2f  | ', cdf(i));
+    fprintf('CDF     | ');
+    for i = 1:length(cdf)
+        fprintf (' %.2f  | ', cdf(i));
     end
-    printf('\n');
+    fprintf('\n');
 
-    printf ('Range     | ');
-    printf('0 - %2d |', range(1)) ;
+    fprintf('Range     | ');
+    fprintf('0 - %2d |', range(1)) ;
     for i = 2:length(range)
-        printf (' %2d -%2d|', range(i-1)+1, range(i));
+        fprintf (' %2d -%2d|', range(i-1)+1, range(i));
     end
-    printf('\n');
+    fprintf('\n');
 }

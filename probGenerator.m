@@ -25,13 +25,13 @@ function [probability] = probGenerator(r, loopNum, m, a, c)
         end
 
         % normalising so that sum sum(probability) = 1
-        probability = probability / sum (probability);
+        probability = probability / sum(probability);
         probability = round(probability * 100) / 100;
         
         % sometimes sum (probability) will not equal 1 because each value is rounded so here the leftover is added to a random value in probability
         if sum(probability) ~= 1
             leftover = 1 -sum(probability);
-            index = randi (1, loopNum) ;
+            index = randi(1, loopNum) ;
             probability(index) = probability(index) + leftover;
         end
 
