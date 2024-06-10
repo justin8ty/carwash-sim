@@ -1,4 +1,4 @@
-function rangeArrival = interTable(r, loopNum, m, a, c, rangeArrival) {
+function rangeArrival = interTable(r, loopNum, m, a, c, rangeArrival)
     %this function prints inter arrival probability table
     
     loopNum = 4;
@@ -55,7 +55,7 @@ function rangeArrival = interTable(r, loopNum, m, a, c, rangeArrival) {
     disp(' ');
 
     fprintf('Arrival Time|');
-    for i=1:1oopNum
+    for i=1:loopNum
         fprintf('   %d   |', i);
     end
     fprintf('\n');
@@ -83,4 +83,3 @@ function rangeArrival = interTable(r, loopNum, m, a, c, rangeArrival) {
         fprintf (' %2d -%2d|', range(i-1)+1, range(i));
     end
     fprintf('\n');
-}

@@ -1,5 +1,4 @@
 function evalResults(intArrival, service)
-{
     % # of customers
     n = length(intArrival);
 
@@ -14,6 +13,7 @@ function evalResults(intArrival, service)
         waiting(i) = max(0, arrival(i) - (arrival(i-1) + service(i-1)));
     end
 
+    avgArrival = mean(arrival);
     avgWaiting = mean(waiting);
     timeSpent = waiting + service;
     avgTimeSpent = mean(timeSpent);
@@ -28,7 +28,6 @@ function evalResults(intArrival, service)
     fprintf('Avg. Time Spent: %.2f\n', avgTimeSpent);
     fprintf('Prob. of Waiting in Queue: %.2f\n', probWaiting);
     fprintf('Avg. Service Time / Counter: %.2f\n', avgService);
-}
 
 % Average inter-arrival time
 % Average arrival time

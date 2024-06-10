@@ -22,7 +22,7 @@ function rangeCounter=counter (loopNum, counterNum, probability, rangeCounter)
     
     fprintf('Service Time|');
     for i=1:loopNum
-        printf('   %d   |', i);
+        fprintf('   %d   |', i);
     end
     fprintf('\n');
 
