@@ -1,4 +1,4 @@
-function output = main(n, r, loopNum, m, a, c)
+function output = mainOld(n, r, loopNum, m, a, c)
     % for testing, try main (5, r, 6, 1, 5, 7)
     
     % n = number of customers
