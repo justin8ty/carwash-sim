@@ -11,7 +11,7 @@ function rangeCounter=counter (loopNum, counterNum, probability, rangeCounter)
     %setting range
     range = zeros(1, 6);
     for i = 1:6
-        range(i) = cdf(i)*100;
+        range(i) = ceil(cdf(i)*100);
         rangeCounter(counterNum, i) = range(i);    
     end
     

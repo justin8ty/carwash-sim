@@ -50,13 +50,13 @@ function output = main(n, r, loopNum, m, a, c)
     
     fprintf('\n');
     fprintf('| n | RN | Inter-arrival time | Arrival time | Number of items |\n');
-    fprintf('| 1 | -- | 0 | 0 | %2d |\n', numOfItems(1));
+    fprintf('| 1 | -- | 0                  | 0            | %2d              |\n', numOfItems(1));
         
     clock = clock + custArrival(2); % clock is set to customer 2's inter-arrival time
     clockRecord(2) = clock; % record second arrival time
     
     for i = 2:n-1
-        fprintf('| %d | %2d | %2d | %2d | %2d |\n', i, interArrival(i), custArrival(i), clock, numOfItems(i));
+        fprintf('| %d | %2d | %2d              | %2d          | %2d             |\n', i, interArrival(i), custArrival(i), clock, numOfItems(i));
         clockRecord(i) = clock;
         clock = clock + custArrival(i+1);
     end
