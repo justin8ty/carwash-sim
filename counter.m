@@ -20,7 +20,7 @@ function rangeCounter=counter (loopNum, counterNum, probability, rangeCounter)
     disp(' ');
     disp(['Counter ', num2str(counterNum), ':']);
     
-    fprintf('Service Time|');
+    fprintf('Service Time | ');
     for i=1:loopNum
         fprintf('   %d   |', i);
     end
@@ -30,21 +30,21 @@ function rangeCounter=counter (loopNum, counterNum, probability, rangeCounter)
     %disp(cdf);
     %disp(range) ;
 
-    fprintf('Probability | ');
+    fprintf('Probability  | ');
     for i = 1:length(probability) %probability retrieved from main.m
-        fprintf(' %.2f | ', probability(i));
+        fprintf(' %.2f  |', probability(i));
     end
     fprintf('\n');
 
-    fprintf('CDF     | ');
+    fprintf('CDF          | ');
     for i = 1:length(cdf)
-        fprintf(' %.2f | ', cdf(i));
+        fprintf(' %.2f  |', cdf(i));
     end
     fprintf('\n');
 
-    fprintf('Range     | ');
-    fprintf(' 0 -%2d |', range(1));
+    fprintf('Range        | ');
+    fprintf(' 0-%2d  |', range(1));
     for i = 2:length(range)
-        fprintf('%2d-%2d |', range(i-1) + 1, range(i));
+        fprintf('  %2d-%2d |', range(i-1) + 1, range(i));
     end
     fprintf('\n');
