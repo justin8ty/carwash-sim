@@ -1,5 +1,5 @@
 function output = main(n, r, loopNum, m, a, c)
-    % for testing, try main (5, r, 6, 1, 5, 7)
+    % for testing, try main(5, r, 6, 1, 5, 7)
     
     % n = number of customers
     % r = 1: rand
@@ -24,7 +24,6 @@ function output = main(n, r, loopNum, m, a, c)
     
     numOfItems = randi([1, 10], 1, n);
     
-    customer = zeros(1, n);
     custArrival = zeros(1, n); % inter-arrival time for each customer
     
     clock = 0; % set timer
@@ -49,19 +48,19 @@ function output = main(n, r, loopNum, m, a, c)
     clockRecord(1) = 0; % record first arrival time as 0
     
     fprintf('\n');
-    fprintf('| n | RN | Inter-arrival time | Arrival time | Number of items |\n');
-    fprintf('| 1 | -- | 0                  | 0            | %2d              |\n', numOfItems(1));
+    fprintf('| n  | RN | Inter-arrival time | Arrival time | Number of items |\n');
+    fprintf('| %-2d | -- | %-18d | %-12d | %-15d |\n', 1, 0, 0, numOfItems(1));
         
     clock = clock + custArrival(2); % clock is set to customer 2's inter-arrival time
     clockRecord(2) = clock; % record second arrival time
     
     for i = 2:n-1
-        fprintf('| %d | %2d | %2d              | %2d          | %2d             |\n', i, interArrival(i), custArrival(i), clock, numOfItems(i));
+        fprintf('| %-2d | %-2d | %-18d | %-12d | %-15d |\n', i, interArrival(i), custArrival(i), clock, numOfItems(i));
         clockRecord(i) = clock;
         clock = clock + custArrival(i+1);
     end
         
-    fprintf('| %d | %2d | %2d | %2d | %2d |\n', n, interArrival(n), custArrival(n), clock, numOfItems(n));
+    fprintf('| %-2d | %-2d | %-18d | %-12d | %-15d |\n', n, interArrival(n), custArrival(n), clock, numOfItems(n));
     clockRecord(n) = clock; % record clock for last customer
         
     fprintf('\n');
@@ -73,13 +72,13 @@ function output = main(n, r, loopNum, m, a, c)
     for i = 1:n
         if numOfItems(i) <= 3
             queue3(end+1) = i; % add customer to queue 3
-            disp(['Customer ', num2str(i), ' arrives at ', num2str(clockRecord(i)), ' and queue at Counter 3']);
+            disp(['Customer ', num2str(i), ' arrives at ', num2str(clockRecord(i)), ' and queues at Counter 3']);
         elseif numel(queue1) <= numel(queue2)
             queue1(end+1) = i; % add customer to queue 1
-            disp(['Customer ', num2str(i), ' arrives at ', num2str(clockRecord(i)), ' and queue at Counter 1']);
+            disp(['Customer ', num2str(i), ' arrives at ', num2str(clockRecord(i)), ' and queues at Counter 1']);
         else
             queue2(end+1) = i; % add customer to queue 2
-            disp(['Customer ', num2str(i), ' arrives at ', num2str(clockRecord(i)), ' and queue at Counter 2']);
+            disp(['Customer ', num2str(i), ' arrives at ', num2str(clockRecord(i)), ' and queues at Counter 2']);
         end
     end
         
@@ -180,12 +179,18 @@ end
 
 function printCounterResults(counterName, queue, svcTime, custServ, timeSvcBegins, timeSvcEnds, waitingTime, timeSpend)
     fprintf('\n%s\n', counterName);
-    fprintf('| n | RN.Service | Service time | Time Service Begins | Time Service Ends | Waiting Time | Time Spent |\n');
+    fprintf('| n  | RN.Service | Service time | Time Service Begins | Time Service Ends| Waiting Time | Time Spent |\n');
     for i = 1:numel(queue)
         customerNum = queue(i);
-        fprintf('| %3d | %5d | %4d | %6d | %6d | %6d | %6d |\n', ...
+        fprintf('| %-2d | %-10d | %-12d | %-19d | %-16d | %-12d | %-10d |\n', ...
             customerNum, svcTime(customerNum), custServ(customerNum), ...
             timeSvcBegins(customerNum), timeSvcEnds(customerNum), ...
             waitingTime(customerNum), timeSpend(customerNum));
     end
+end
+
+function evalResults(interArrival, svcTime)
+    fprintf('\nTotal customers: %d\n', length(interArrival));
+    fprintf('Inter-arrival times: %s\n', mat2str(interArrival));
+    fprintf('Service times: %s\n', mat2str(svcTime));
 end

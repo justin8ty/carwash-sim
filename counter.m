@@ -45,6 +45,6 @@ function rangeCounter=counter (loopNum, counterNum, probability, rangeCounter)
     fprintf('Range        | ');
     fprintf(' 0-%2d  |', range(1));
     for i = 2:length(range)
-        fprintf('  %2d-%2d |', range(i-1) + 1, range(i));
+        fprintf('%2d-%2d  |', range(i-1) + 1, range(i));
     end
     fprintf('\n');
