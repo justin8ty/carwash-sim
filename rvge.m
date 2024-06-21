@@ -3,7 +3,7 @@ function output = rvge(loopNum)
     x = zeros(1,loopNum) ; 
     
     for i=1:length(sequence) 
-        x(i) = (-1/1)*(log(l-sequence(i))); 
+        x(i) = (-1/1)*(log(1-sequence(i))); 
     end 
     output = x; 
 end 

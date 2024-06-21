@@ -18,7 +18,7 @@ function rangeCounter=counter (loopNum, counterNum, probability, rangeCounter)
     rangeCounter = range;
     
     disp(' ');
-    disp(['Counter ', num2str(counterNum), ':']);
+    disp(['Wash Bay ', num2str(counterNum), ':']);
     
     fprintf('Service Time | ');
     for i=1:loopNum
