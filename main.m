@@ -2,7 +2,7 @@ function output = main(n, r, loopNum, m, a, c)
     fprintf('\n********** WELCOME TO CMA6134 CARWASH SIMULATOR **********\n');
     fprintf('\nRandom Generators: 1: rand(), 2: LCG, 3: RVGE, 4: RVGU\n');
     fprintf('\n');
-    n = input('Enter the # of customers : ');
+    n = input('Enter the # of cars      : ');
     r = input('Choose a random generator: ');
     loopNum = 6;
     m = [];
@@ -23,7 +23,7 @@ function output = main(n, r, loopNum, m, a, c)
     % r = 4: rvgu (random variate generator for uniform distribution)
     % loopNum is the number of columns in service time table
     
-    [interArrival, svcTime] = custDetails(n, r, loopNum, m, a, c); % passing two arrays from custDetails
+    [intArrival, svcTime] = custDetails(n, r, loopNum, m, a, c); % passing two arrays from custDetails
     
     % array of ranges generated for service time
     rangeCounter = zeros(3, loopNum);
@@ -47,13 +47,13 @@ function output = main(n, r, loopNum, m, a, c)
     
     % comparing RN to inter-arrival ranges
     for i = 2:n
-        if interArrival(i) >= 0 && interArrival(i) <= rangeArrival(1)
+        if intArrival(i) >= 0 && intArrival(i) <= rangeArrival(1)
             custArrival(i) = 1;
-        elseif interArrival(i) >= rangeArrival(1) + 1 && interArrival(i) <= rangeArrival(2)
+        elseif intArrival(i) >= rangeArrival(1) + 1 && intArrival(i) <= rangeArrival(2)
             custArrival(i) = 2;
-        elseif interArrival(i) >= rangeArrival(2) + 1 && interArrival(i) <= rangeArrival(3)
+        elseif intArrival(i) >= rangeArrival(2) + 1 && intArrival(i) <= rangeArrival(3)
             custArrival(i) = 3;
-        elseif interArrival(i) >= rangeArrival(3) + 1 && interArrival(i) <= rangeArrival(4)
+        elseif intArrival(i) >= rangeArrival(3) + 1 && intArrival(i) <= rangeArrival(4)
             custArrival(i) = 4;
         else
             fprintf('error\n');
@@ -173,13 +173,13 @@ function output = main(n, r, loopNum, m, a, c)
     
     for i = 2:n-1
         svcType = svcTypes{randi(3)};
-        fprintf('| %-2d | %-2d | %-18d | %-12d | %-15d | %-15s |\n', i, interArrival(i), custArrival(i), clock, numOfItems(i), svcType);
+        fprintf('| %-2d | %-2d | %-18d | %-12d | %-15d | %-15s |\n', i, intArrival(i), custArrival(i), clock, numOfItems(i), svcType);
         clockRecord(i) = clock;
         clock = clock + custArrival(i+1);
     end
     
     svcType = svcTypes{randi(3)};
-    fprintf('| %-2d | %-2d | %-18d | %-12d | %-15d | %-15s |\n', n, interArrival(n), custArrival(n), clock, numOfItems(n), svcType);
+    fprintf('| %-2d | %-2d | %-18d | %-12d | %-15d | %-15s |\n', n, intArrival(n), custArrival(n), clock, numOfItems(n), svcType);
     clockRecord(n) = clock; % record clock for last car
         
     fprintf('\n');
@@ -189,9 +189,9 @@ function output = main(n, r, loopNum, m, a, c)
     printCounterResults('Wash Bay 3:', queue3, svcTime, custServ, timeSvcBegins, timeSvcEnds, waitingTime, timeSpend);
     
     fprintf('\n');
-    evalResults(interArrival, svcTime);
+    evalResults(intArrival, svcTime);
     
-    fprintf('\n********** CARWASH SIMULATION COMPLETED. **********');
+    fprintf('\n********** CARWASH SIMULATION COMPLETED.  **********');
     fprintf('\n********** WE HOPE YOU ENJOY OUR SERVICE. **********\n');
 end
 
