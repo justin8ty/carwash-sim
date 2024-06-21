@@ -17,34 +17,34 @@ function [intArrival, svcTime] = custDetails(n, r, loopNum, m, a, c)
         end
     
     elseif r == 2
-        intArrivalLcg = lcg(loopNum, m, a, c);
+        intArrivalLcg = lcg(n, m, a, c);
         for i = 2:n
             intArrival(i) = round(intArrivalLcg(i) * 99) + 1;
         end
         
-        svcTimeLcg = lcg(loopNum, m, a, c);
+        svcTimeLcg = lcg(n, m, a, c);
         for i = 1:n
             svcTime(i) = round(svcTimeLcg(i) * 99) + 1;
         end
         
     elseif r == 3
-        intArrivalRvge = rvge(loopNum);
+        intArrivalRvge = rvge(n);
         for i = 2:n
             intArrival(i) = mod(round(intArrivalRvge(i) * 99), 100) + 1;
         end
         
-        svcTimeRvge = rvge(loopNum);
+        svcTimeRvge = rvge(n);
         for i = 1:n
             svcTime(i) = mod(round(svcTimeRvge(i) * 99), 100) + 1;
         end
         
     elseif r == 4
-        intArrivalRvgu = rvgu(loopNum);
+        intArrivalRvgu = rvgu(n);
         for i = 2:n
             intArrival(i) = mod(round(intArrivalRvgu(i) * 99), 100) + 1;
         end
         
-        svcTimeRvgu = rvgu(loopNum);
+        svcTimeRvgu = rvgu(n);
         for i = 1:n
             svcTime(i) = mod(round(svcTimeRvgu(i) * 99), 100) + 1;
         end

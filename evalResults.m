@@ -15,7 +15,7 @@ function evalResults(intArrival, svcTime)
 
     avgArrival = mean(arrival);
     avgWaiting = mean(waiting);
-    timeSpent = waiting + svcTime;
+    timeSpent = waiting + svcTime * ones(n, 1);
     avgTimeSpent = mean(timeSpent);
     probWaiting = sum(waiting > 0) / n;
     avgService = mean(svcTime);
