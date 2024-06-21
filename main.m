@@ -2,7 +2,7 @@ function output = main(n, r, loopNum, m, a, c)
     fprintf('\n********** WELCOME TO CMA6134 CARWASH SIMULATOR **********\n');
     fprintf('\nRandom Generators: 1: rand(), 2: LCG, 3: RVGE, 4: RVGU\n');
     fprintf('\n');
-    n = input('Enter the # of customers: ');
+    n = input('Enter the # of customers : ');
     r = input('Choose a random generator: ');
     loopNum = 6;
     m = [];
@@ -161,20 +161,25 @@ function output = main(n, r, loopNum, m, a, c)
     % Displaying detailed results for each counter
     fprintf('\n---------- Simulation Tables ----------\n\n');
 
+    svcTypes = {'Express', 'Economic', 'Full Service'};
+
+
     fprintf('Overall Simulation Table:\n');
-    fprintf('| n  | RN | Inter-arrival time | Arrival time | Number of items |\n');
-    fprintf('| %-2d | -- | %-18d | %-12d | %-15d |\n', 1, 0, 0, numOfItems(1));
+    fprintf('| n  | RN | Inter-arrival time | Arrival time | Number of items | Service Type    |\n');
+    fprintf('| %-2d | -- | %-18d | %-12d | %-15d | %-15s |\n', 1, 0, 0, numOfItems(1), svcTypes{randi(3)});
         
     clock = clock + custArrival(2); % clock is set to car 2's inter-arrival time
     clockRecord(2) = clock; % record second arrival time
     
     for i = 2:n-1
-        fprintf('| %-2d | %-2d | %-18d | %-12d | %-15d |\n', i, interArrival(i), custArrival(i), clock, numOfItems(i));
+        svcType = svcTypes{randi(3)};
+        fprintf('| %-2d | %-2d | %-18d | %-12d | %-15d | %-15s |\n', i, interArrival(i), custArrival(i), clock, numOfItems(i), svcType);
         clockRecord(i) = clock;
         clock = clock + custArrival(i+1);
     end
-        
-    fprintf('| %-2d | %-2d | %-18d | %-12d | %-15d |\n', n, interArrival(n), custArrival(n), clock, numOfItems(n));
+    
+    svcType = svcTypes{randi(3)};
+    fprintf('| %-2d | %-2d | %-18d | %-12d | %-15d | %-15s |\n', n, interArrival(n), custArrival(n), clock, numOfItems(n), svcType);
     clockRecord(n) = clock; % record clock for last car
         
     fprintf('\n');
