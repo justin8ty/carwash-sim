@@ -2,15 +2,15 @@ function rangeCounter=counter (loopNum, counterNum, probability, rangeCounter)
     %this function prints counter details
     
     %setting cdf
-    cdf = zeros(1,6);
+    cdf = zeros(1,loopNum);
     cdf(1) = probability(1);
     for i=2:6
         cdf(i) = probability(i) + cdf(i-1);
     end
 
     %setting range
-    range = zeros(1, 6);
-    for i = 1:6
+    range = zeros(1, loopNum);
+    for i = 1:loopNum
         range(i) = ceil(cdf(i)*100);
         rangeCounter(counterNum, i) = range(i);    
     end
