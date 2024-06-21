@@ -1,7 +1,9 @@
 function output = main(n, r, loopNum, m, a, c)
-    % Prompt user for input
-    n = input('Enter the number of customers: ');
-    r = input('Choose a random generator (1: rand, 2: LCG, 3: RVGE, 4: RVGU): ');
+    fprintf('\n********** WELCOME TO CMA6134 CARWASH SIMULATOR **********\n');
+    fprintf('\nRandom Generators: 1: rand(), 2: LCG, 3: RVGE, 4: RVGU\n');
+    fprintf('\n');
+    n = input('Enter the # of customers: ');
+    r = input('Choose a random generator: ');
     loopNum = 6;
     m = [];
     a = [];
@@ -12,7 +14,7 @@ function output = main(n, r, loopNum, m, a, c)
         c = input('Enter the additive constant (c): ');
     end
 
-    % for testing, try main(5, r, 6, 1, 5, 7)
+    % for testing LCG, try 1, 5, 7
     
     % n = number of cars
     % r = 1: rand
@@ -26,6 +28,7 @@ function output = main(n, r, loopNum, m, a, c)
     % array of ranges generated for service time
     rangeCounter = zeros(3, loopNum);
     
+    fprintf('\n---------- Pre-Defined Tables ----------\n');
     for counterNum = 1:3
         probability = probGenerator(r, loopNum, m, a, c);
         rangeCounter(counterNum, :) = counter(loopNum, counterNum, probability, rangeCounter);
@@ -59,39 +62,22 @@ function output = main(n, r, loopNum, m, a, c)
             
     clockRecord = zeros(1, n);
     clockRecord(1) = 0; % record first arrival time as 0
-    
-    fprintf('\n');
-    fprintf('| n  | RN | Inter-arrival time | Arrival time | Number of items |\n');
-    fprintf('| %-2d | -- | %-18d | %-12d | %-15d |\n', 1, 0, 0, numOfItems(1));
-        
-    clock = clock + custArrival(2); % clock is set to car 2's inter-arrival time
-    clockRecord(2) = clock; % record second arrival time
-    
-    for i = 2:n-1
-        fprintf('| %-2d | %-2d | %-18d | %-12d | %-15d |\n', i, interArrival(i), custArrival(i), clock, numOfItems(i));
-        clockRecord(i) = clock;
-        clock = clock + custArrival(i+1);
-    end
-        
-    fprintf('| %-2d | %-2d | %-18d | %-12d | %-15d |\n', n, interArrival(n), custArrival(n), clock, numOfItems(n));
-    clockRecord(n) = clock; % record clock for last car
-        
-    fprintf('\n');
-        
+            
     queue1 = []; % arrays for queues of each counter
     queue2 = [];
     queue3 = [];
 
+    fprintf('\n---------- Simulation Logs ----------\n\n');
     for i = 1:n
         if numOfItems(i) <= 3
             queue3(end+1) = i; % add car to queue 3
-            disp(['car ', num2str(i), ' arrives at ', num2str(clockRecord(i)), ' and queues at Counter 3']);
+            disp(['Car ', num2str(i), ' arrives at ', num2str(clockRecord(i)), ' and queues at Counter 3']);
         elseif numel(queue1) <= numel(queue2)
             queue1(end+1) = i; % add car to queue 1
-            disp(['car ', num2str(i), ' arrives at ', num2str(clockRecord(i)), ' and queues at Counter 1']);
+            disp(['Car ', num2str(i), ' arrives at ', num2str(clockRecord(i)), ' and queues at Counter 1']);
         else
             queue2(end+1) = i; % add car to queue 2
-            disp(['car ', num2str(i), ' arrives at ', num2str(clockRecord(i)), ' and queues at Counter 2']);
+            disp(['Car ', num2str(i), ' arrives at ', num2str(clockRecord(i)), ' and queues at Counter 2']);
         end
     end
         
@@ -161,23 +147,47 @@ function output = main(n, r, loopNum, m, a, c)
     timeSpend = waitingTime + custServ;
         
     % displaying departure messages
+    fprintf('\n');
     for i = 1:length(timeSvcEnds)
         disp(['Departure of car ', num2str(i), ' at ', num2str(timeSvcEnds(i))]);
     end
         
     % displaying service begin messages
+    fprintf('\n');
     for i = 1:length(timeSvcBegins)
         disp(['Service of car ', num2str(i), ' begins at ', num2str(timeSvcBegins(i))]);
     end
         
     % Displaying detailed results for each counter
-    printCounterResults('Wash Bay 1', queue1, svcTime, custServ, timeSvcBegins, timeSvcEnds, waitingTime, timeSpend);
-    printCounterResults('Wash Bay 2', queue2, svcTime, custServ, timeSvcBegins, timeSvcEnds, waitingTime, timeSpend);
-    printCounterResults('Wash Bay 3', queue3, svcTime, custServ, timeSvcBegins, timeSvcEnds, waitingTime, timeSpend);
+    fprintf('\n---------- Simulation Tables ----------\n\n');
+
+    fprintf('Overall Simulation Table:\n');
+    fprintf('| n  | RN | Inter-arrival time | Arrival time | Number of items |\n');
+    fprintf('| %-2d | -- | %-18d | %-12d | %-15d |\n', 1, 0, 0, numOfItems(1));
+        
+    clock = clock + custArrival(2); % clock is set to car 2's inter-arrival time
+    clockRecord(2) = clock; % record second arrival time
+    
+    for i = 2:n-1
+        fprintf('| %-2d | %-2d | %-18d | %-12d | %-15d |\n', i, interArrival(i), custArrival(i), clock, numOfItems(i));
+        clockRecord(i) = clock;
+        clock = clock + custArrival(i+1);
+    end
+        
+    fprintf('| %-2d | %-2d | %-18d | %-12d | %-15d |\n', n, interArrival(n), custArrival(n), clock, numOfItems(n));
+    clockRecord(n) = clock; % record clock for last car
+        
+    fprintf('\n');
+
+    printCounterResults('Wash Bay 1:', queue1, svcTime, custServ, timeSvcBegins, timeSvcEnds, waitingTime, timeSpend);
+    printCounterResults('Wash Bay 2:', queue2, svcTime, custServ, timeSvcBegins, timeSvcEnds, waitingTime, timeSpend);
+    printCounterResults('Wash Bay 3:', queue3, svcTime, custServ, timeSvcBegins, timeSvcEnds, waitingTime, timeSpend);
     
     fprintf('\n');
     evalResults(interArrival, svcTime);
-    fprintf('\nCARWASH SIMULATION COMPLETED.\n');
+    
+    fprintf('\n********** CARWASH SIMULATION COMPLETED. **********');
+    fprintf('\n********** WE HOPE YOU ENJOY OUR SERVICE. **********\n');
 end
 
 function serviceTime = findServiceTime(randomValue, range)

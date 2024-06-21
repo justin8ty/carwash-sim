@@ -52,7 +52,7 @@ function rangeArrival = interTable(r, loopNum, m, a, c, rangeArrival)
         rangeArrival(i) = range(i);
     end
 
-    disp(' ');
+    fprintf('\n---------- Inter-Arrival Times ----------\n\n');
 
     fprintf('Arrival Time|');
     for i = 1:loopNum

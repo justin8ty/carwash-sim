@@ -21,7 +21,7 @@ function evalResults(intArrival, service)
     avgService = mean(service);
 
 
-    fprintf('Simulation Results:\n');
+    fprintf('---------- Simulation Results ----------\n\n');
     fprintf('Avg. Inter-Arrival Time: %.2f\n', avgIntArrival);
     fprintf('Avg. Arrival Time: %.2f\n', avgArrival);
     fprintf('Avg. Waiting Time: %.2f\n', avgWaiting);
