@@ -1,23 +1,13 @@
-function evalResults(intArrival, svcTime)
+function evalResults(n, intArrival, svcTime, waitingTime, timeSpend, clock, clockRecord)
     % # of customers
     n = length(intArrival);
 
     avgIntArrival = mean(intArrival);
-    arrival = cumsum(intArrival);
 
-    % Waiting time for each customer
-    % n rows, 1 column
-    waiting = zeros(n, 1);
-    waiting(1) = 0;
-    for i = 2:n
-        waiting(i) = max(0, arrival(i) - (arrival(i-1) + svcTime(i-1)));
-    end
-
-    avgArrival = mean(arrival);
-    avgWaiting = mean(waiting);
-    timeSpent = waiting + svcTime * ones(n, 1);
-    avgTimeSpent = mean(timeSpent);
-    probWaiting = sum(waiting > 0) / n;
+    avgArrival = mean(clockRecord);
+    avgWaiting = mean(waitingTime);
+    avgTimeSpent = mean(timeSpend);
+    probWaiting = sum(waitingTime > 0) / n;
     avgService = mean(svcTime);
 
     % Display the results
@@ -28,4 +18,9 @@ function evalResults(intArrival, svcTime)
     fprintf('Avg.  Time Spent:             %.2f\n', avgTimeSpent);
     fprintf('Prob. of Waiting in Queue:    %.2f\n', probWaiting);
     fprintf('Avg.  Service Time / Counter: %.2f\n', avgService);
+
+    fprintf('timespent Time:     %.2f\n', timeSpend);
+    fprintf('arriv Time:     %.2f\n', clock);
+    fprintf('intarr Time:     %.2f\n', intArrival);
+    fprintf('wait Time:     %.2f\n', waitingTime);
 end

@@ -66,21 +66,22 @@ function output = main(n, r, loopNum, m, a, c)
     svcTypes = {'Express', 'Economic', 'Full Service'};
 
     fprintf('\n---------- Overall Simulation Table ----------\n\n');
-    fprintf('| n  | RN | Inter-arrival time | Arrival time | Number of items | Service Type    |\n');
-    fprintf('| %-2d | -- | %-18d | %-12d | %-15d | %-15s |\n', 1, 0, 0, numOfItems(1), svcTypes{randi(3)});
+    fprintf('| n  | RN | Inter-arrival time | Arrival time | Service Type    |\n');
+    fprintf('| %-2d | -- | %-18d | %-12d | %-15s |\n', 1, 0, 0, svcTypes{randi(3)});
+
         
     clock = clock + custArrival(2); % clock is set to car 2's inter-arrival time
     clockRecord(2) = clock; % record second arrival time
     
     for i = 2:n-1
         svcType = svcTypes{randi(3)};
-        fprintf('| %-2d | %-2d | %-18d | %-12d | %-15d | %-15s |\n', i, intArrival(i), custArrival(i), clock, numOfItems(i), svcType);
+        fprintf('| %-2d | %-2d | %-18d | %-12d | %-15s |\n', i, intArrival(i), custArrival(i), clock, svcType);
         clockRecord(i) = clock;
         clock = clock + custArrival(i+1);
     end
     
     svcType = svcTypes{randi(3)};
-    fprintf('| %-2d | %-2d | %-18d | %-12d | %-15d | %-15s |\n', n, intArrival(n), custArrival(n), clock, numOfItems(n), svcType);
+    fprintf('| %-2d | %-2d | %-18d | %-12d | %-15s |\n', n, intArrival(n), custArrival(n), clock, svcType);
     clockRecord(n) = clock; % record clock for last car
             
     queue1 = []; % arrays for queues of each counter
@@ -186,7 +187,7 @@ function output = main(n, r, loopNum, m, a, c)
     printCounterResults('Wash Bay 3:', queue3, svcTime, custServ, timeSvcBegins, timeSvcEnds, waitingTime, timeSpend);
     
     fprintf('\n');
-    evalResults(intArrival, svcTime);
+    evalResults(n, intArrival, svcTime, waitingTime, timeSpend, clock, clockRecord);
     
     fprintf('\n********** CARWASH SIMULATION COMPLETED.  **********');
     fprintf('\n********** WE HOPE YOU ENJOY OUR SERVICE. **********\n');
