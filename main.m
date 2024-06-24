@@ -187,7 +187,7 @@ function output = main(n, r, loopNum, m, a, c)
     printCounterResults('Wash Bay 3:', queue3, svcTime, custServ, timeSvcBegins, timeSvcEnds, waitingTime, timeSpend);
     
     fprintf('\n');
-    evalResults(n, intArrival, svcTime, waitingTime, timeSpend, clock, clockRecord);
+    evalResults(n, intArrival, svcTime, waitingTime, timeSpend, clockRecord);
     
     fprintf('\n********** CARWASH SIMULATION COMPLETED.  **********');
     fprintf('\n********** WE HOPE YOU ENJOY OUR SERVICE. **********\n');
